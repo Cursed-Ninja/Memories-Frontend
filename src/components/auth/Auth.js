@@ -132,7 +132,7 @@ const Auth = () => {
               margin: "0 0 0 10px",
             }}
           >
-            <GoogleLogin onSuccess={googleSuccess} onError={googleFailure} />
+            <GoogleLogin onSuccess={googleSuccess} onError={googleFailure} useOneTap auto_select/>
           </div>
           <Grid container justify="flex-end">
             <Grid item>

@@ -2,6 +2,7 @@ import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { googleLogout } from "@react-oauth/google";
 import decode from "jwt-decode";
 
 import memoriesLogo from "../../images/memories-Logo.png";
@@ -19,6 +20,7 @@ const Navbar = () => {
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
+    googleLogout();
     setUser(null);
   };
   useEffect(() => {
