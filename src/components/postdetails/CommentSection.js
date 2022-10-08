@@ -17,9 +17,9 @@ const CommentSection = ({ post }) => {
 
   const handleClick = async () => {
     const finalComment = `${user?.result?.name}: ${comment}`;
+    setComment("");
     const newComments = await dispatch(commentPost(finalComment, post._id));
     setComments(newComments);
-    setComment("");
   };
 
   useEffect(() => {
