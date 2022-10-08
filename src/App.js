@@ -18,7 +18,6 @@ const App = () => {
   });
 
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(process.env.REACT_APP_CLIENT_ID);
   return (
     <Router>
       <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
