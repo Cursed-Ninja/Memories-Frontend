@@ -29,6 +29,17 @@ const Form = ({ currentId, setCurrentId }) => {
       alert("Please fill out all the required fields");
       return;
     }
+    if (
+      postData.selectedFile &&
+      (postData.selectedFile[0] !== "/" ||
+        postData.selectedFile[0] !== "i" ||
+        postData.selectedFile[0] !== "R" ||
+        postData.selectedFile[0] !== "U" ||
+        postData.selectedFile[0] !== "P")
+    ) {
+      alert("Please upload an image");
+      return;
+    }
     if (currentId) {
       dispatch(
         updatePost(currentId, { ...postData, name: user?.result?.name })
