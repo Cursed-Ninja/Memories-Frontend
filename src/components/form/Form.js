@@ -31,11 +31,11 @@ const Form = ({ currentId, setCurrentId }) => {
     }
     if (
       postData.selectedFile &&
-      (postData.selectedFile[0] !== "/" ||
-        postData.selectedFile[0] !== "i" ||
-        postData.selectedFile[0] !== "R" ||
-        postData.selectedFile[0] !== "U" ||
-        postData.selectedFile[0] !== "P")
+      postData.selectedFile[0] !== "/" &&
+      postData.selectedFile[0] !== "i" &&
+      postData.selectedFile[0] !== "R" &&
+      postData.selectedFile[0] !== "U" &&
+      postData.selectedFile[0] !== "P"
     ) {
       alert("Please upload an image");
       return;
