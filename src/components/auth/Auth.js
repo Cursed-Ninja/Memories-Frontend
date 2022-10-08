@@ -55,7 +55,9 @@ const Auth = () => {
     try {
       dispatch({ type: "AUTH", data: { result, token } });
       navigate("/");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const googleFailure = () => {
     console.log("Google Sign In was unsuccessful. Try again later!");
