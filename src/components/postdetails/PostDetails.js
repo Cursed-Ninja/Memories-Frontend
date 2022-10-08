@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { getPost, getPostsBySearch } from "../../actions/posts";
+import { getPost, getPosts } from "../../actions/posts";
 
 // import useStyles from "./styles";
 
@@ -20,19 +20,28 @@ const PostDetails = () => {
   const navigate = useNavigate();
   // const classes = useStyles();
   const { id } = useParams();
-  const [recommendedPosts, setRecommendedPosts] = useState([]);
+  const [recommendedPosts, setRecommendedPosts] = useState(null);
   useEffect(() => {
     dispatch(getPost(id));
   }, [id]);
 
   useEffect(() => {
+    dispatch(getPosts());
+  }, [post]);
+
+  useEffect(() => {
     if (posts && post) {
-      setRecommendedPosts(posts.filter(({ _id }) => _id !== post._id));
+      setRecommendedPosts(
+        posts.filter(({ _id, tags }) => {
+          return (
+            post.tags.some((tag) => tags.includes(tag)) && _id !== post._id
+          );
+        })
+      );
     }
   }, [posts]);
 
-  if (!post) return null;
-  if (isLoading)
+  if (!post || isLoading || recommendedPosts == null)
     return (
       <Paper elevation={6} className="loadingPaper">
         <CircularProgress size="7em" />
@@ -66,12 +75,7 @@ const PostDetails = () => {
             </Typography>
           </div>
           <div className="imageSection">
-            <img
-              src={
-                post.selectedFile
-              }
-              alt={post.title}
-            />
+            <img src={post.selectedFile} alt={post.title} />
           </div>
         </div>
         <Divider style={{ margin: "20px 0" }} />
