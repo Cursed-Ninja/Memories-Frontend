@@ -108,7 +108,9 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {post.message}
+            {post.message.length > 100
+              ? post.message.substring(0, 100) + "..."
+              : post.message}
           </Typography>
         </CardContent>
       </ButtonBase>
