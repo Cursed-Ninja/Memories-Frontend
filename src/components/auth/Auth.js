@@ -13,13 +13,13 @@ import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
-import useStyles from "./styles";
 import Input from "./Input";
 import { signin, signup } from "../../actions/auth";
 
+import "./styles.css";
+
 const Auth = () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const [isSignup, setIsSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -62,12 +62,12 @@ const Auth = () => {
   };
   return (
     <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={3}>
-        <Avatar className={classes.avatar}>
+      <Paper className="paper" elevation={3}>
+        <Avatar className="avatar">
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant="h5">{isSignup ? "Sign Up" : "Sign In"}</Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <Grid container spacing={"10px"}>
             {isSignup && (
               <>
@@ -118,12 +118,18 @@ const Auth = () => {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className="submit"
             onClick={handleSubmit}
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
-          <div style={{display: "flex", justifyContent: "center", margin: "0 0 0 10px"}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "0 0 0 10px",
+            }}
+          >
             <GoogleLogin onSuccess={googleSuccess} onError={googleFailure} />
           </div>
           <Grid container justify="flex-end">

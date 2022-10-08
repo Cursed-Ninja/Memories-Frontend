@@ -1,0 +1,66 @@
+.appBar {
+  border-radius: 15;
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-between !important;
+  flex-direction: row !important;
+  align-items: center;
+  padding: 10px 50px;
+}
+.heading {
+  text-decoration: none;
+  font-size: 2em;
+  font-weight: 300;
+}
+.image {
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.toolbar {
+  display: flex;
+  justify-content: flex-end !important;
+}
+.profile {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  align-items: center;
+}
+.logout {
+  margin-left: 20px;
+}
+.userName {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.brandContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+img {
+  max-width: 100%;
+}
+.purple {
+  color: #8ab73a;
+  background-color: #673AB7;
+}
+
+@media (max-width: 650px) {
+  .appBar {
+    flex-direction: column !important;
+  }
+  .toolbar {
+    /* width: auto; */
+  }
+  .profile {
+    width: auto;
+    margin-top: 20;
+    justify-content: center;
+  }
+  .brandContainer {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}

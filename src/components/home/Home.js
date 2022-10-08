@@ -19,7 +19,9 @@ import Posts from "../posts/Posts";
 import Form from "../form/Form";
 import Pagination from "../pagination/Pagination";
 
-import useStyles from "./styles";
+// import useStyles from "./styles";
+
+import "./styles.css";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -32,7 +34,7 @@ const Home = () => {
   const navigate = useNavigate();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
-  const classes = useStyles();
+  // const classes = useStyles();
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -61,17 +63,13 @@ const Home = () => {
           justify="space-between"
           alignItems="stretch"
           spacing="10px"
-          className={classes.gridContainer}
+          className="gridContainer"
         >
           <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <AppBar
-              className={classes.appBarSearch}
-              position="static"
-              color="inherit"
-            >
+            <AppBar className="appBarSearch" position="static" color="inherit">
               <TextField
                 name="search"
                 variant="outlined"
@@ -108,7 +106,7 @@ const Home = () => {
               />
               <Button
                 onClick={searchPost}
-                className={classes.searchButton}
+                className="searchButton"
                 color="primary"
                 variant="contained"
               >
@@ -117,7 +115,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             {!searchQuery && !tags.length && (
-              <Paper elevation={6} className={classes.pagination}>
+              <Paper elevation={6} className="pagination">
                 <Pagination page={page} />
               </Paper>
             )}

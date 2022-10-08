@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@mui/material";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
-import useStyles from "./styles";
+// import useStyles from "./styles";
 
 import { createPost, updatePost } from "../../actions/posts";
 import { useNavigate } from "react-router-dom";
+
+import "./styles.css";
+
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
@@ -16,7 +19,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const post = useSelector((state) =>
     currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
@@ -52,7 +55,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   if (!user?.result?.name) {
     return (
-      <Paper className={classes.paper}>
+      <Paper className="paper">
         <Typography variant="h6" align="center">
           Please sign in to create your own memories and like other's memories.
         </Typography>
@@ -61,11 +64,11 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <Paper className={classes.paper} elevation={6}>
+    <Paper className="paper" elevation={6}>
       <form
         autoComplete="off"
         noValidate
-        className={`${classes.root} ${classes.form}`}
+        className={`root form`}
         onSubmit={handleSubmit}
       >
         <div
@@ -116,7 +119,7 @@ const Form = ({ currentId, setCurrentId }) => {
           }
           required
         />
-        <div className={classes.fileInput}>
+        <div className="fileInput">
           <FileBase
             type="file"
             multiple={false}
@@ -126,7 +129,7 @@ const Form = ({ currentId, setCurrentId }) => {
           ></FileBase>
         </div>
         <Button
-          className={classes.buttonSubmit}
+          className="buttonSubmit"
           variant="contained"
           color="primary"
           size="large"

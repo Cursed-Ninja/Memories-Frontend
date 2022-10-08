@@ -8,7 +8,9 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { getPost, getPostsBySearch } from "../../actions/posts";
 
-import useStyles from "./styles";
+// import useStyles from "./styles";
+
+import "./styles.css";
 
 import CommentSection from "./CommentSection";
 
@@ -16,7 +18,7 @@ const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const classes = useStyles();
+  // const classes = useStyles();
   const { id } = useParams();
   const [recommendedPosts, setRecommendedPosts] = useState([]);
   useEffect(() => {
@@ -24,13 +26,7 @@ const PostDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    if (post) {
-      dispatch(getPostsBySearch({ search: "", tags: post?.tags.join(",") }));
-    }
-  }, [post]);
-
-  useEffect(() => {
-    if (posts) {
+    if (posts && post) {
       setRecommendedPosts(posts.filter(({ _id }) => _id !== post._id));
     }
   }, [posts]);
@@ -38,7 +34,7 @@ const PostDetails = () => {
   if (!post) return null;
   if (isLoading)
     return (
-      <Paper elevation={6} className={classes.loadingPaper}>
+      <Paper elevation={6} className="loadingPaper">
         <CircularProgress size="7em" />
       </Paper>
     );
@@ -48,8 +44,8 @@ const PostDetails = () => {
   return (
     <Paper style={{ padding: "20px", borderRadius: "15px" }} elevation={6}>
       <div>
-        <div className={classes.card}>
-          <div className={classes.section}>
+        <div className="card-details">
+          <div className="section">
             <Typography variant="h3" component="h2">
               {post.title}
             </Typography>
@@ -69,33 +65,26 @@ const PostDetails = () => {
               {moment(post.createdAt).fromNow()}
             </Typography>
           </div>
-          <div className={classes.imageSection}>
+          <div className="imageSection">
             <img
-              className={classes.media}
               src={
-                post.selectedFile ||
-                "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+                post.selectedFile
               }
               alt={post.title}
             />
           </div>
         </div>
-
-        <Divider style={{ margin: "20px 0" }} />
-        <Typography variant="body1">
-          <strong>Realtime Chat - coming soon!</strong>
-        </Typography>
         <Divider style={{ margin: "20px 0" }} />
         <CommentSection post={post} />
         <Divider style={{ margin: "20px 0" }} />
       </div>
-      {recommendedPosts.length && (
-        <div className={classes.section}>
+      {recommendedPosts.length > 0 ? (
+        <div className="section">
           <Typography gutterBottom variant="h5">
             You might also like:{" "}
           </Typography>
           <Divider />
-          <div className={classes.recommendedPosts}>
+          <div className="recommendedPosts">
             {recommendedPosts.map(
               ({ title, message, name, likes, selectedFile, _id }) => (
                 <div
@@ -121,6 +110,8 @@ const PostDetails = () => {
             )}
           </div>
         </div>
+      ) : (
+        <></>
       )}
     </Paper>
   );

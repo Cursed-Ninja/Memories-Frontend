@@ -1,0 +1,54 @@
+.imageSection > img {
+  border-radius: 20px;
+  object-fit: cover;
+  width: 100%;
+  max-width: 400px;
+  background: none;
+}
+.card-details {
+  display: flex;
+  width: 100%;
+}
+.section {
+  border-radius: 20px;
+  margin: 10px;
+  flex: 1;
+}
+.imageSection {
+  margin-left: 20px;
+  height: fit-content;
+}
+.recommendedPosts {
+  display: flex;
+  flex-wrap: wrap;
+}
+.loadingPaper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 15px;
+  height: 39vh;
+}
+.commentsOuterContainer {
+  display: flex !important;
+  justify-content: space-between;
+}
+.commentsInnerContainer {
+  height: 200px;
+  overflow-y: auto;
+  margin-right: 30px;
+}
+
+@media (max-width: 600px) {
+  .imageSection {
+    margin-left: 0;
+  }
+  .card-details {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .recommendedPosts {
+    flex-direction: column;
+  }
+}

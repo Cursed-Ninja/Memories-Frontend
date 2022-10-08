@@ -6,10 +6,12 @@ import decode from "jwt-decode";
 
 import memoriesLogo from "../../images/memories-Logo.png";
 import memoriesText from "../../images/memories-Text.png";
-import useStyles from "./styles";
+// import useStyles from "./styles";
+
+import "./styles.css";
 
 const Navbar = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,32 +30,27 @@ const Navbar = () => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
   return (
-    <AppBar className={classes.appBar} position="static" color="inherit">
-      <Link to={"/"} className={classes.brandContainer}>
+    <AppBar className="appBar" position="static" color="inherit">
+      <Link to={"/"} className="brandContainer">
         <img src={memoriesText} alt="icon" height="45px" />
-        <img
-          className={classes.image}
-          src={memoriesLogo}
-          alt="icon"
-          height="40px"
-        />
+        <img className="image" src={memoriesLogo} alt="icon" height="40px" />
       </Link>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar className="toolbar">
         {user ? (
-          <div className={classes.profile}>
+          <div className="profile">
             <Avatar
-              className={classes.purple}
+              className="purple"
               alt={user.result.name}
               src={user.result.picture}
             >
               {user.result.name.charAt(0)}
             </Avatar>
-            <Typography className={classes.userName} variant="h6">
-              {user.result.name}
+            <Typography className="username" variant="h6">
+              {user.result.name.split(" ")[0].slice(0, 10)}
             </Typography>
             <Button
               variant="contained"
-              className={classes.logout}
+              className="logout"
               color="secondary"
               onClick={logout}
             >

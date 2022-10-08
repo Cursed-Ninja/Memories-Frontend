@@ -2,12 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import { Typography, TextField, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 
-import useStyles from "./styles";
+// import useStyles from "./styles";
+import "./styles.css";
 
 import { commentPost } from "../../actions/posts";
 
 const CommentSection = ({ post }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [comments, setComments] = useState(post?.comments);
   const [comment, setComment] = useState("");
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -26,8 +27,8 @@ const CommentSection = ({ post }) => {
   }, [comments]);
   return (
     <div>
-      <div className={classes.commentsOuterContainer}>
-        <div className={classes.commentsInnerContainer}>
+      <div className="commentsOuterContainer">
+        <div className="commentsInnerContainer">
           <Typography gutterBottom variant="h6">
             Comments
           </Typography>
