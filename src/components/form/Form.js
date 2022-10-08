@@ -23,19 +23,17 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!postData.title || !postData.message || !postData.tags) {
       alert("Please fill out all the required fields");
       return;
     }
     if (
       postData.selectedFile &&
-      postData.selectedFile[0] !== "/" &&
-      postData.selectedFile[0] !== "i" &&
-      postData.selectedFile[0] !== "R" &&
-      postData.selectedFile[0] !== "U" &&
-      postData.selectedFile[0] !== "P"
+      postData.selectedFile.slice(5, 10) !== "image"
     ) {
       alert("Please upload an image");
       return;
@@ -52,6 +50,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const clear = () => {
     setCurrentId(null);
+
     setPostData({
       title: "",
       message: "",
@@ -108,6 +107,8 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="message"
           variant="outlined"
+          multiline
+          rows={10}
           label="Message"
           fullWidth
           value={postData.message}
@@ -130,15 +131,14 @@ const Form = ({ currentId, setCurrentId }) => {
           }
           required
         />
-        <div className="fileInput">
-          <FileBase
-            type="file"
-            multiple={false}
-            onDone={({ base64 }) =>
-              setPostData({ ...postData, selectedFile: base64 })
-            }
-          ></FileBase>
-        </div>
+        <FileBase
+          type="file"
+          multiple={false}
+          onDone={({ base64 }) =>
+            setPostData({ ...postData, selectedFile: base64 })
+          }
+        ></FileBase>
+
         <Button
           className="buttonSubmit"
           variant="contained"

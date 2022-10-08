@@ -26,11 +26,11 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
-  const [likes, setLikes] = useState(post?.likes);
+  const [likes, setLikes] = useState(post?.likes || []);
   const userID = user?.result?.sub || user?.result?._id;
 
   const Likes = () => {
-    if (post?.likes?.length > 0) {
+    if (likes > 0) {
       return likes.find((like) => like === userID) !== undefined ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
@@ -58,15 +58,15 @@ const Post = ({ post, setCurrentId }) => {
     navigate(`/posts/${post._id}`);
   };
 
-  const hasLikedPost = post?.likes?.find((like) => like === userID);
+  const hasLikedPost = likes.find((like) => like === userID) !== undefined;
 
   const handleLike = async () => {
-    dispatch(likePost(post._id));
     if (hasLikedPost) {
       setLikes(post.likes.filter((id) => id !== userID));
     } else {
       setLikes([...post.likes, userID]);
     }
+    dispatch(likePost(post._id));
   };
 
   return (
