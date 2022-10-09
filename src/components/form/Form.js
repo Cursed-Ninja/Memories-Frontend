@@ -65,8 +65,8 @@ const Form = ({ currentId, setCurrentId }) => {
 
   if (!user?.result?.name) {
     return (
-      <Paper className="paper">
-        <Typography variant="h6" align="center" elevation={6}>
+      <Paper className="paper" elevation={6}>
+        <Typography variant="h6" align="center" >
           Please sign in to create your memories and like others' memories.
         </Typography>
       </Paper>
