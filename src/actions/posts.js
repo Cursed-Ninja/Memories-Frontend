@@ -10,6 +10,8 @@ import {
   LIKE,
   START_LOADING,
   END_LOADING,
+  START_LOADING_LIKES,
+  END_LOADING_LIKES,
 } from "../constants/actionTypes";
 
 export const getPost = (id) => async (dispatch) => {
@@ -79,8 +81,11 @@ export const deletePost = (id) => async (dispatch) => {
 
 export const likePost = (id) => async (dispatch) => {
   try {
+    dispatch({ type: START_LOADING_LIKES });
     const { data } = await api.likePost(id);
     dispatch({ type: LIKE, payload: data });
+    dispatch({ type: END_LOADING_LIKES });
+    return data.likes
   } catch (error) {
     console.log(error);
   }

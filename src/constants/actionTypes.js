@@ -9,6 +9,8 @@ export const COMMENT = "COMMENT";
 
 export const START_LOADING = "START_LOADING";
 export const END_LOADING = "END_LOADING";
+export const START_LOADING_LIKES = "START_LOADING_LIKES";
+export const END_LOADING_LIKES = "END_LOADING_LIKES";
 
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";

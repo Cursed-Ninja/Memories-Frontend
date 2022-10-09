@@ -8,13 +8,14 @@ import {
   Button,
   Typography,
   ButtonBase,
+  CircularProgress,
 } from "@mui/material";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { deletePost, likePost } from "../../../actions/posts";
@@ -24,13 +25,17 @@ import "./styles.css";
 const Post = ({ post, setCurrentId }) => {
   // const classes = useStyles();
   const dispatch = useDispatch();
+  const { isLikesLoading } = useSelector((state) => state.posts);
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
   const [likes, setLikes] = useState(post?.likes || []);
   const userID = user?.result?.sub || user?.result?._id;
 
   const Likes = () => {
-    if (likes > 0) {
+    if (isLikesLoading) {
+      return <CircularProgress size="1rem" />;
+    }
+    if (likes.length > 0) {
       return likes.find((like) => like === userID) !== undefined ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
@@ -58,15 +63,8 @@ const Post = ({ post, setCurrentId }) => {
     navigate(`/posts/${post._id}`);
   };
 
-  const hasLikedPost = likes.find((like) => like === userID) !== undefined;
-
   const handleLike = async () => {
-    if (hasLikedPost) {
-      setLikes(post.likes.filter((id) => id !== userID));
-    } else {
-      setLikes([...post.likes, userID]);
-    }
-    dispatch(likePost(post._id));
+    setLikes(await dispatch(likePost(post._id)));
   };
 
   return (
