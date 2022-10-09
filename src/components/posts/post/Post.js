@@ -32,9 +32,6 @@ const Post = ({ post, setCurrentId }) => {
   const userID = user?.result?.sub || user?.result?._id;
 
   const Likes = () => {
-    if (isLikesLoading) {
-      return <CircularProgress size="1rem" />;
-    }
     if (likes.length > 0) {
       return likes.find((like) => like === userID) !== undefined ? (
         <>
@@ -113,14 +110,18 @@ const Post = ({ post, setCurrentId }) => {
         </CardContent>
       </ButtonBase>
       <CardActions className="cardActions">
-        <Button
-          size="small"
-          color="primary"
-          onClick={handleLike}
-          disabled={!user?.result}
-        >
-          <Likes />
-        </Button>
+        {isLikesLoading ? (
+          <CircularProgress size="1rem" />
+        ) : (
+          <Button
+            size="small"
+            color="primary"
+            onClick={handleLike}
+            disabled={!user?.result}
+          >
+            <Likes />
+          </Button>
+        )}
         {(user?.result?.sub === post?.creator ||
           user?.result?._id === post?.creator) && (
           <Button
