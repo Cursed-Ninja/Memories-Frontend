@@ -110,7 +110,7 @@ const Post = ({ post, setCurrentId }) => {
         </CardContent>
       </ButtonBase>
       <CardActions className="cardActions">
-        {isLikesLoading ? (
+        {isLikesLoading[post._id] ? (
           <CircularProgress size="1rem" />
         ) : (
           <Button

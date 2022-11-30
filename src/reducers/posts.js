@@ -14,7 +14,7 @@ import {
 } from "../constants/actionTypes";
 
 const posts = (
-  state = { isLoading: true, isLikesLoading: false, posts: [] },
+  state = { isLoading: true, isLikesLoading: {}, posts: [] },
   action
 ) => {
   switch (action.type) {
@@ -23,9 +23,15 @@ const posts = (
     case END_LOADING:
       return { ...state, isLoading: false };
     case START_LOADING_LIKES:
-      return { ...state, isLikesLoading: true };
+      return {
+        ...state,
+        isLikesLoading: { ...state.isLikesLoading, [action?.data]: true },
+      };
     case END_LOADING_LIKES:
-      return { ...state, isLikesLoading: false };
+      return {
+        ...state,
+        isLikesLoading: { ...state.isLikesLoading, [action?.data]: false },
+      };
     case FETCH_ALL:
       return {
         ...state,

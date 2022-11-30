@@ -42,13 +42,13 @@ const Navbar = () => {
           <div className="profile">
             <Avatar
               className="purple"
-              alt={user.result.name}
-              src={user.result.picture}
+              alt={user?.result?.name}
+              src={user?.result?.picture}
             >
-              {user.result.name.charAt(0)}
+              {user?.result?.name.charAt(0)}
             </Avatar>
             <Typography className="username" variant="h6">
-              {user.result.name.split(" ")[0].slice(0, 10)}
+              {user?.result?.name.split(" ")[0].slice(0, 10)}
             </Typography>
             <Button
               variant="contained"
